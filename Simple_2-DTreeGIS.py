@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 KDT Tree Node
 """
@@ -6,6 +8,24 @@ class KDTNode:
         self.left =  None
         self.right = None
         self.value = val
+
+"""
+This Function partition the Plane in equally two halves
+"""
+def _partitionPlanePoints(Points, arrindex, medianVal):
+    partition1Points = []
+    partitition2Points = []
+    
+    for i in range(len(Points)):
+        pnt = Points[i]
+        toConsiderVal_LatorLong = pnt[arrindex]
+        
+        if toConsiderVal_LatorLong < medianVal:
+            partition1Points.append(pnt)
+        else:
+            partitition2Points.append(pnt)
+    
+    return partition1Points, partitition2Points
 
 """
 This Function creates KDTree
@@ -18,7 +38,7 @@ def BuildKDTree(P, depth) :
         """
         JUST get the Median and Median Lat, Median Long
         """
-        Median = np.mean(P, axis=0) #median
+        Median = np.median(P, axis=0)
         MedianLat = Median[0]
         MedianLong = Median[1]
         
